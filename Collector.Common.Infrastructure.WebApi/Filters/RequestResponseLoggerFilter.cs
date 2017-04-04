@@ -49,16 +49,24 @@ namespace Collector.Common.Infrastructure.WebApi.Filters
 
                     CorrelationState.InitializeCorrelation(request.CorrelationId);
 
-                    if (string.IsNullOrEmpty(response.Value.Id))
+                    try
                     {
-                        response.Value.Id = CorrelationState.GetCurrentCorrelationId().ToString();
+                        if (string.IsNullOrEmpty(response.Value.Id))
+                        {
+                            response.Value.Id = CorrelationState.GetCurrentCorrelationId().ToString();
+                        }
+                    }
+                    // ReSharper disable once EmptyGeneralCatchClause - Work around if response does not have an Id property
+                    catch
+                    {
                     }
 
                     _logger.ForContext("ResponseBody", Serialize(response.Value)).Information("Response sent");
                 }
             }
-            catch (RuntimeBinderException)
+            catch (RuntimeBinderException exception)
             {
+                _logger.Error(exception, "Could not log response");
             }
 
             return base.OnActionExecutedAsync(actionExecutedContext, cancellationToken);
