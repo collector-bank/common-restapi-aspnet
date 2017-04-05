@@ -91,6 +91,7 @@
     <Compile Include="Infrastructure\BodyAwareModelBinderProvider.cs" />
     <Compile Include="Infrastructure\EnsureRequestParameterBinding.cs" />
     <Compile Include="Infrastructure\RequestBuilder.cs" />
+    <Compile Include="Infrastructure\ResponseHelper.cs" />
     <Compile Include="Infrastructure\RestfulParameterBinding.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
