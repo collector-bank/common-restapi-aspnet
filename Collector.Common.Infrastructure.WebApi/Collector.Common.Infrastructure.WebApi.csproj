@@ -84,6 +84,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\BadRequestException.cs" />
+    <Compile Include="Exceptions\GoneHttpStatusCodeException.cs" />
+    <Compile Include="Exceptions\HttpStatusCodeException.cs" />
+    <Compile Include="Exceptions\NotFoundException.cs" />
+    <Compile Include="Exceptions\NotImplementedHttpStatusCodeException.cs" />
+    <Compile Include="Exceptions\ServerErrorException.cs" />
     <Compile Include="Filters\ContextActionFilter.cs" />
     <Compile Include="Filters\CorrelationIdActionFilter.cs" />
     <Compile Include="Filters\RequestResponseLoggerFilter.cs" />
