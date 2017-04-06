@@ -10,8 +10,8 @@ namespace Collector.Common.Infrastructure.WebApi.Exceptions
 
     public class ServerErrorException : HttpStatusCodeException
     {
-        public ServerErrorException(string errorCode)
-            : base(errorCode)
+        public ServerErrorException(string message)
+            : base(message)
         {
         }
 

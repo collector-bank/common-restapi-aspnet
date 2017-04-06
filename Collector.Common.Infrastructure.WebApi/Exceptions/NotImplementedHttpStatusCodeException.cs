@@ -10,8 +10,8 @@ namespace Collector.Common.Infrastructure.WebApi.Exceptions
 
     public class NotImplementedHttpStatusCodeException : HttpStatusCodeException
     {
-        public NotImplementedHttpStatusCodeException(string errorCode)
-            : base(errorCode)
+        public NotImplementedHttpStatusCodeException(string message)
+            : base(message)
         {
         }
 

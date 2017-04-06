@@ -10,8 +10,8 @@ namespace Collector.Common.Infrastructure.WebApi.Exceptions
 
     public class BadRequestException : HttpStatusCodeException
     {
-        public BadRequestException(string errorCode)
-            : base(errorCode)
+        public BadRequestException(string message)
+            : base(message)
         {
         }
 

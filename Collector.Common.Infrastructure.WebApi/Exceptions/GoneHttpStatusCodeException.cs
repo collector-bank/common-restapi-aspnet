@@ -10,8 +10,8 @@ namespace Collector.Common.Infrastructure.WebApi.Exceptions
 
     public class GoneHttpStatusCodeException : HttpStatusCodeException
     {
-        public GoneHttpStatusCodeException(string errorCode)
-            : base(errorCode)
+        public GoneHttpStatusCodeException(string message)
+            : base(message)
         {
         }
 
