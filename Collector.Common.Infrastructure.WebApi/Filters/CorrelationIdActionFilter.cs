@@ -45,7 +45,7 @@ namespace Collector.Common.Infrastructure.WebApi.Filters
                 // shouldn't replace it.
                 try
                 {
-                    if (string.IsNullOrEmpty(response.Value.Id))
+                    if (string.IsNullOrEmpty(response.Value.CorrelationId))
                     {
                         response.Value.CorrelationId = CorrelationState.GetCurrentCorrelationId().ToString();
                     }
