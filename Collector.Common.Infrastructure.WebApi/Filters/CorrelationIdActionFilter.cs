@@ -47,7 +47,7 @@ namespace Collector.Common.Infrastructure.WebApi.Filters
                 {
                     if (string.IsNullOrEmpty(response.Value.Id))
                     {
-                        response.Value.Id = CorrelationState.GetCurrentCorrelationId().ToString();
+                        response.Value.CorrelationId = CorrelationState.GetCurrentCorrelationId().ToString();
                     }
 
                     actionExecutedContext.ActionContext.Response.Content = response;
