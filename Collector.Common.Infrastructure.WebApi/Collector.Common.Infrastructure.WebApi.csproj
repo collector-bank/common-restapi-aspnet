@@ -35,8 +35,8 @@
       <HintPath>..\packages\Collector.Common.Library.3.10.2\lib\net45\Collector.Common.Library.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Collector.Common.RestContracts, Version=1.0.9.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Collector.Common.RestContracts.1.0.9.0\lib\net452\Collector.Common.RestContracts.dll</HintPath>
+    <Reference Include="Collector.Common.RestContracts, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Collector.Common.RestContracts.3.0.0\lib\net452\Collector.Common.RestContracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.ServiceBus, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -103,7 +103,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
