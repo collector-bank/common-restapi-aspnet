@@ -6,6 +6,8 @@
 
 namespace Collector.Common.Infrastructure.WebApi.Filters
 {
+    using System;
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using System.Web.Http.Controllers;
@@ -16,20 +18,36 @@ namespace Collector.Common.Infrastructure.WebApi.Filters
 
     public class CorrelationIdActionFilter : ActionFilterAttribute
     {
+        private readonly bool _setCorrelationIdFromContext;
+
+        public CorrelationIdActionFilter(bool setCorrelationIdFromContext = false)
+        {
+            _setCorrelationIdFromContext = setCorrelationIdFromContext;
+        }
+
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
-            var correlationId = CorrelationState.InitializeCorrelation();
+            Guid? existingCorrelationId = null;
+            dynamic request = actionContext.ActionArguments.Values.FirstOrDefault();
 
-            dynamic request = actionContext.ActionArguments["request"];
-
-            if (request == null)
+            if (request != null)
             {
-                return;
+                if (_setCorrelationIdFromContext)
+                {
+                    try
+                    {
+                        existingCorrelationId = Guid.Parse(request.Context);
+                    }
+                    catch
+                    {
+                    }
+                }
             }
 
-            request.CorrelationId = correlationId;
+            CorrelationState.InitializeCorrelation(existingCorrelationId);
 
-            actionContext.ActionArguments["request"] = request;
+            if (request != null)
+                CorrelationState.TryAddOrUpdateCorrelationValue("CallerContext", request.Context);
         }
 
         public override Task OnActionExecutedAsync(HttpActionExecutedContext actionExecutedContext, CancellationToken cancellationToken)
@@ -47,7 +65,7 @@ namespace Collector.Common.Infrastructure.WebApi.Filters
                 {
                     if (string.IsNullOrEmpty(response.Value.CorrelationId))
                     {
-                        response.Value.CorrelationId = CorrelationState.GetCurrentCorrelationId().ToString();
+                        response.Value.CorrelationId = CorrelationState.GetCurrentCorrelationId()?.ToString();
                     }
 
                     actionExecutedContext.ActionContext.Response.Content = response;

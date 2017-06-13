@@ -6,6 +6,7 @@
 
 namespace Collector.Common.Infrastructure.WebApi.Filters
 {
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using System.Web.Http.Filters;
@@ -16,22 +17,25 @@ namespace Collector.Common.Infrastructure.WebApi.Filters
     {
         public override Task OnActionExecutedAsync(HttpActionExecutedContext actionExecutedContext, CancellationToken cancellationToken)
         {
-            dynamic dynamicRequest = actionExecutedContext.ActionContext.ActionArguments["request"];
+            dynamic dynamicRequest = actionExecutedContext.ActionContext.ActionArguments.Values.FirstOrDefault();
 
-            try
+            if (dynamicRequest != null)
             {
-                dynamic response = actionExecutedContext.ActionContext.Response?.Content;
-
-                // Response can be null if we respond with streamed data (i.e. csv/pdf export)
-                if (response != null)
+                try
                 {
-                    response.Value.Context = dynamicRequest.Context;
+                    dynamic response = actionExecutedContext.ActionContext.Response?.Content;
 
-                    actionExecutedContext.ActionContext.Response.Content = response;
+                    // Response can be null if we respond with streamed data (i.e. csv/pdf export)
+                    if (response != null)
+                    {
+                        response.Value.Context = dynamicRequest.Context;
+
+                        actionExecutedContext.ActionContext.Response.Content = response;
+                    }
                 }
-            }
-            catch (RuntimeBinderException)
-            {
+                catch (RuntimeBinderException)
+                {
+                }
             }
 
             return base.OnActionExecutedAsync(actionExecutedContext, cancellationToken);
