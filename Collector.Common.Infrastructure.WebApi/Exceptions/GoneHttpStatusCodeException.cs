@@ -10,11 +10,6 @@ namespace Collector.Common.Infrastructure.WebApi.Exceptions
 
     public class GoneHttpStatusCodeException : HttpStatusCodeException
     {
-        public GoneHttpStatusCodeException(string message)
-            : base(message)
-        {
-        }
-
         public override HttpStatusCode HttpStatusCode => HttpStatusCode.Gone;
     }
 }

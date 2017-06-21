@@ -10,11 +10,6 @@ namespace Collector.Common.Infrastructure.WebApi.Exceptions
 
     public class NotImplementedHttpStatusCodeException : HttpStatusCodeException
     {
-        public NotImplementedHttpStatusCodeException(string message)
-            : base(message)
-        {
-        }
-
         public override HttpStatusCode HttpStatusCode => HttpStatusCode.NotImplemented;
     }
 }
