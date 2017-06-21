@@ -13,11 +13,6 @@ namespace Collector.Common.Infrastructure.WebApi.Exceptions
 
     public abstract class HttpStatusCodeException : Exception, IRetrySuppressingException
     {
-        protected HttpStatusCodeException(string message)
-            : base(message)
-        {
-        }
-        
         public abstract HttpStatusCode HttpStatusCode { get; }
     }
 }

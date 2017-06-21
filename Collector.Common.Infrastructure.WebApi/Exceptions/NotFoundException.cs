@@ -10,11 +10,6 @@ namespace Collector.Common.Infrastructure.WebApi.Exceptions
 
     public class NotFoundException : HttpStatusCodeException
     {
-        public NotFoundException(string message)
-            : base(message)
-        {
-        }
-
         public override HttpStatusCode HttpStatusCode => HttpStatusCode.NotFound;
     }
 }
