@@ -12,7 +12,9 @@ namespace Collector.Common.Infrastructure.WebApi.Filters
     using System.Threading.Tasks;
     using System.Web.Http.Controllers;
     using System.Web.Http.Filters;
-    using Library.Correlation;
+
+    using Collector.Common.Correlation;
+    
     using Microsoft.CSharp.RuntimeBinder;
 
 

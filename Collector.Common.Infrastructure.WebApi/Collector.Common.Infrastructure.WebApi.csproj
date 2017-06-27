@@ -31,9 +31,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Collector.Common.Library, Version=6.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Collector.Common.Library.6.1.0\lib\net45\Collector.Common.Library.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Collector.Common.Correlation, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Collector.Common.Correlation.1.0.3\lib\net45\Collector.Common.Correlation.dll</HintPath>
+    </Reference>
+    <Reference Include="Collector.Common.Library, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Collector.Common.Library.7.0.0\lib\net45\Collector.Common.Library.dll</HintPath>
     </Reference>
     <Reference Include="Collector.Common.RestContracts, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Collector.Common.RestContracts.3.1.0\lib\net452\Collector.Common.RestContracts.dll</HintPath>
