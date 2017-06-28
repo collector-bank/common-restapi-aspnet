@@ -7,60 +7,77 @@
 namespace Collector.Common.Infrastructure.WebApi.Filters
 {
     using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Net;
     using System.Net.Http;
     using System.Web.Http.Controllers;
     using System.Web.Http.Filters;
 
+    using Collector.Common.Library.Collections;
+    using Collector.Common.Library.Collections.Interfaces;
+    using Collector.Common.Library.Utils;
     using Collector.Common.Library.Validation;
     using Collector.Common.RestContracts;
 
+    /// <summary>
+    /// A filter for validating incoming requests using attribute validation.
+    /// </summary>
     public class RequestValidationFilter : ActionFilterAttribute
     {
+        /// <summary>
+        /// Occurs before the action method is invoked.
+        /// </summary>
+        /// <param name="actionContext">The action context.</param>
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
-            var validationError = GetValidationError(actionContext);
+            var errors = GetParseErrors(actionContext);
+            
+            if(errors.IsEmpty())
+                errors = GetContractValidationErrors(actionContext);
 
-            if (validationError == null)
+            if (errors.IsEmpty())
                 return;
 
-            var error = GetParseError(actionContext) ?? validationError;
-
-            actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.BadRequest, error);
+            actionContext.Response = actionContext.Request.CreateResponse(
+                HttpStatusCode.BadRequest,
+                new Response<object>
+                    {
+                        Error = new Error
+                                    {
+                                        Code = $"{(int)HttpStatusCode.BadRequest}",
+                                        Message = HttpStatusCode.BadRequest.ToString(),
+                                        Errors = errors
+                                    }
+                    });
         }
 
-        private static Error GetParseError(HttpActionContext actionContext)
+        private static IFixedEnumerable<ErrorInfo> GetParseErrors(HttpActionContext actionContext)
         {
-            var firstParseException = actionContext.ModelState.Values
-                                                   .SelectMany(v => v.Errors)
-                                                   .FirstOrDefault(error => error.Exception != null)?.Exception;
-
-            if (firstParseException == null)
-                return null;
-
-            return new Error(
-                       code: "VALIDATION_ERROR",
-                       message: firstParseException.Message);
+            return actionContext.ModelState.Values
+                                .SelectMany(v => v.Errors)
+                                .Where(error => error.Exception != null)
+                                .Select(error => error.Exception)
+                                .Select(e => new ErrorInfo(e.Message, "PARSE_ERROR"))
+                                .ToFixed();
         }
 
-        private static Error GetValidationError(HttpActionContext actionContext)
+        private static IFixedEnumerable<ErrorInfo> GetContractValidationErrors(HttpActionContext actionContext)
         {
-            var firstException = actionContext.ActionArguments.Values.Select(Validate).FirstOrDefault(e => e != null);
-
-            if (firstException == null)
-                return null;
-
-            return new Error(
-                       code: firstException.Message,
-                       message: firstException.Message);
+            return actionContext.ActionArguments.Values
+                                .SelectMany(ValidateActionArgument)
+                                .Where(e => e != null)
+                                .Select(e => new ErrorInfo(e.Message, "VALIDATION_ERROR"))
+                                .ToFixed();
         }
 
-        private static Exception Validate(object argument)
+        private static IEnumerable<Exception> ValidateActionArgument(object argument)
         {
-            return argument == null
-                ? new Exception("NULL_REQUEST")
-                : AnnotationValidator.Validate(argument, AnnotationValidator.ValidationBehaviour.Deep);
+            if (argument == null)
+                return new[] { new ValidationException("NULL_REQUEST") };
+
+            return AnnotationValidator.GetAllValidationErrors(argument, AnnotationValidator.ValidationBehaviour.Deep);
         }
     }
 }
