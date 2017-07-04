@@ -6,20 +6,15 @@
 
 namespace Collector.Common.Infrastructure.WebApi.Filters
 {
-    using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Net;
     using System.Net.Http;
     using System.Web.Http.Controllers;
     using System.Web.Http.Filters;
-
-    using Collector.Common.Library.Collections;
-    using Collector.Common.Library.Collections.Interfaces;
-    using Collector.Common.Library.Utils;
-    using Collector.Common.Library.Validation;
+    
     using Collector.Common.RestContracts;
+    using Collector.Common.RestContracts.Interfaces;
 
     /// <summary>
     /// A filter for validating incoming requests using attribute validation.
@@ -34,10 +29,10 @@ namespace Collector.Common.Infrastructure.WebApi.Filters
         {
             var errors = GetParseErrors(actionContext);
             
-            if(errors.IsEmpty())
+            if(!errors.Any())
                 errors = GetContractValidationErrors(actionContext);
 
-            if (errors.IsEmpty())
+            if (!errors.Any())
                 return;
 
             actionContext.Response = actionContext.Request.CreateResponse(
@@ -53,31 +48,22 @@ namespace Collector.Common.Infrastructure.WebApi.Filters
                     });
         }
 
-        private static IFixedEnumerable<ErrorInfo> GetParseErrors(HttpActionContext actionContext)
+        private static IList<ErrorInfo> GetParseErrors(HttpActionContext actionContext)
         {
             return actionContext.ModelState.Values
                                 .SelectMany(v => v.Errors)
                                 .Where(error => error.Exception != null)
                                 .Select(error => error.Exception)
                                 .Select(e => new ErrorInfo(e.Message, "PARSE_ERROR"))
-                                .ToFixed();
+                                .ToList();
         }
 
-        private static IFixedEnumerable<ErrorInfo> GetContractValidationErrors(HttpActionContext actionContext)
+        private static IList<ErrorInfo> GetContractValidationErrors(HttpActionContext actionContext)
         {
             return actionContext.ActionArguments.Values
-                                .SelectMany(ValidateActionArgument)
-                                .Where(e => e != null)
-                                .Select(e => new ErrorInfo(e.Message, "VALIDATION_ERROR"))
-                                .ToFixed();
-        }
-
-        private static IEnumerable<Exception> ValidateActionArgument(object argument)
-        {
-            if (argument == null)
-                return new[] { new ValidationException("NULL_REQUEST") };
-
-            return AnnotationValidator.GetAllValidationErrors(argument, AnnotationValidator.ValidationBehaviour.Deep);
+                                .OfType<IRequest>()
+                                .SelectMany(request => request.GetValidationErrors())
+                                .ToList();
         }
     }
 }
