@@ -9,6 +9,7 @@ namespace Collector.Common.Infrastructure.WebApi.Filters
     using System;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.IO;
     using System.Linq;
     using System.Net.Http;
@@ -17,10 +18,7 @@ namespace Collector.Common.Infrastructure.WebApi.Filters
     using System.Web;
     using System.Web.Http.Controllers;
     using System.Web.Http.Filters;
-
-    using Collector.Common.Library;
-    using Collector.Common.Library.Collections;
-    using Collector.Common.Library.Collections.Interfaces;
+    
     using Collector.Common.RestContracts;
 
     using Newtonsoft.Json;
@@ -30,7 +28,7 @@ namespace Collector.Common.Infrastructure.WebApi.Filters
 
     public class RequestResponseLoggerFilter : ActionFilterAttribute
     {
-        private static readonly ConcurrentDictionary<Type, IFixedEnumerable<PropertyInfo>> CachedSensitiveStrings = new ConcurrentDictionary<Type, IFixedEnumerable<PropertyInfo>>();
+        private static readonly ConcurrentDictionary<Type, IReadOnlyCollection<PropertyInfo>> CachedSensitiveStrings = new ConcurrentDictionary<Type, IReadOnlyCollection<PropertyInfo>>();
         private const string REQUEST_RECIEVED_TIME = "RequestRecievedTime";
         private readonly ILogger _logger;
 
@@ -44,7 +42,7 @@ namespace Collector.Common.Infrastructure.WebApi.Filters
             try
             {
                 if (actionContext?.Request?.Properties != null)
-                    actionContext.Request.Properties[REQUEST_RECIEVED_TIME] = SystemTimeOffset.UtcNow;
+                    actionContext.Request.Properties[REQUEST_RECIEVED_TIME] = DateTimeOffset.UtcNow;
 
                 var sensitiveStrings = GetSensitiveStrings(actionContext);
                 var rawRequestBody = ReadRequestContent(actionContext);
@@ -81,7 +79,7 @@ namespace Collector.Common.Infrastructure.WebApi.Filters
 
             var requestRecievedTime = actionExecutedContext.Request?.Properties?[REQUEST_RECIEVED_TIME] as DateTimeOffset?;
             if (requestRecievedTime.HasValue)
-                logger = logger.ForContext("ResponseTimeMilliseconds", (int)(SystemTimeOffset.UtcNow - requestRecievedTime.Value).TotalMilliseconds);
+                logger = logger.ForContext("ResponseTimeMilliseconds", (int)(DateTimeOffset.UtcNow - requestRecievedTime.Value).TotalMilliseconds);
 
             logger.Information("Rest response sent");
         }
@@ -124,22 +122,22 @@ namespace Collector.Common.Infrastructure.WebApi.Filters
             }
         }
 
-        private IFixedEnumerable<PropertyInfo> GetSensitiveStrings(HttpActionContext actionContext)
+        private IReadOnlyCollection<PropertyInfo> GetSensitiveStrings(HttpActionContext actionContext)
         {
             var requestPair = actionContext?.ActionArguments?.FirstOrDefault();
             // ReSharper disable once ConstantConditionalAccessQualifier, Resharper does not understand that we need the ?. operator here.
             var type = requestPair?.Value?.GetType();
 
             if (type == null)
-                return FixedEnumerable<PropertyInfo>.Empty;
+                return new ReadOnlyCollection<PropertyInfo>(new List<PropertyInfo>());
 
             return CachedSensitiveStrings.GetOrAdd(
                 key: type,
                 valueFactory: newKey =>
                                   {
-                                      return type.GetProperties()
+                                      return new ReadOnlyCollection<PropertyInfo>(type.GetProperties()
                                                  .Where(p => p.GetCustomAttributes(typeof(SensitiveStringAttribute), true).Any())
-                                                 .ToFixed();
+                                                 .ToList());
                                   });
         }
     }
