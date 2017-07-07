@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="RequestResponseLoggerFilter.cs" company="Collector AB">
+// <copyright file="RequestLoggingFilter.cs" company="Collector AB">
 //   Copyright © Collector AB. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -12,7 +12,6 @@ namespace Collector.Common.Infrastructure.WebApi.Filters
     using System.Collections.ObjectModel;
     using System.IO;
     using System.Linq;
-    using System.Net.Http;
     using System.Reflection;
     using System.Text;
     using System.Web;
@@ -26,15 +25,15 @@ namespace Collector.Common.Infrastructure.WebApi.Filters
 
     using Serilog;
 
-    public class RequestResponseLoggerFilter : ActionFilterAttribute
+    public class RequestLoggingFilter : ActionFilterAttribute
     {
+        internal const string REQUEST_RECIEVED_TIME = "RequestRecievedTime";
         private static readonly ConcurrentDictionary<Type, IReadOnlyCollection<PropertyInfo>> CachedSensitiveStrings = new ConcurrentDictionary<Type, IReadOnlyCollection<PropertyInfo>>();
-        private const string REQUEST_RECIEVED_TIME = "RequestRecievedTime";
         private readonly ILogger _logger;
 
-        public RequestResponseLoggerFilter(ILogger logger)
+        public RequestLoggingFilter(ILogger logger)
         {
-            _logger = logger.ForContext<RequestResponseLoggerFilter>();
+            _logger = logger.ForContext(GetType());
         }
 
         public override void OnActionExecuting(HttpActionContext actionContext)
@@ -59,31 +58,6 @@ namespace Collector.Common.Infrastructure.WebApi.Filters
             }
         }
 
-        public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
-        {
-            dynamic dynamicResponseContent = actionExecutedContext.ActionContext.Response.Content;
-            var responseContent = actionExecutedContext.ActionContext.Response.Content;
-            var mediaType = responseContent?.Headers?.ContentType?.MediaType;
-            var statusCode = (int)actionExecutedContext.Response.StatusCode;
-
-            var logger = _logger.ForContext("StatusCode", statusCode);
-
-
-            if (!string.IsNullOrEmpty(mediaType))
-            {
-                logger = logger.ForContext("MediaType", mediaType);
-
-                if (mediaType.ToLower().Contains("application/json"))
-                    logger = logger.ForContext("ResponseBody", Serialize(dynamicResponseContent.Value));
-            }
-
-            var requestRecievedTime = actionExecutedContext.Request?.Properties?[REQUEST_RECIEVED_TIME] as DateTimeOffset?;
-            if (requestRecievedTime.HasValue)
-                logger = logger.ForContext("ResponseTimeMilliseconds", (int)(DateTimeOffset.UtcNow - requestRecievedTime.Value).TotalMilliseconds);
-
-            logger.Information("Rest response sent");
-        }
-
         private static string ReadRequestContent(HttpActionContext actionContext)
         {
             if (actionContext.Request.Method != System.Net.Http.HttpMethod.Post
@@ -99,11 +73,6 @@ namespace Collector.Common.Infrastructure.WebApi.Filters
                 context.Request.InputStream.Seek(position, SeekOrigin.Begin);
                 return Encoding.UTF8.GetString(stream.ToArray());
             }
-        }
-
-        private static string Serialize(object value)
-        {
-            return JsonConvert.SerializeObject(value, Formatting.Indented);
         }
 
         private string FormatRequestBody(string value, IEnumerable<PropertyInfo> sensitiveStrings)
