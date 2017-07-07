@@ -70,7 +70,8 @@
     <Compile Include="ErrorHandlingActionInvoker.cs" />
     <Compile Include="Filters\ContextActionFilter.cs" />
     <Compile Include="Filters\CorrelationIdActionFilter.cs" />
-    <Compile Include="Filters\RequestResponseLoggerFilter.cs" />
+    <Compile Include="Filters\RequestLoggingFilter.cs" />
+    <Compile Include="Filters\ResponseLoggingFilter.cs" />
     <Compile Include="Filters\RequestValidationFilter.cs" />
     <Compile Include="Infrastructure\BodyAwareModelBinderProvider.cs" />
     <Compile Include="Infrastructure\EnsureRequestParameterBinding.cs" />
