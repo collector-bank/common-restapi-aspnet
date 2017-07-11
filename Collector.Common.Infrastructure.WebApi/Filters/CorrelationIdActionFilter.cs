@@ -8,6 +8,7 @@ namespace Collector.Common.Infrastructure.WebApi.Filters
 {
     using System;
     using System.Linq;
+    using System.Net.Http;
     using System.Threading;
     using System.Threading.Tasks;
     using System.Web.Http.Controllers;
@@ -46,7 +47,8 @@ namespace Collector.Common.Infrastructure.WebApi.Filters
                 }
             }
 
-            CorrelationState.InitializeCorrelation(existingCorrelationId);
+            var disposableCorrelationState = CorrelationState.InitializeCorrelation(existingCorrelationId);
+            actionContext.Request.RegisterForDispose(disposableCorrelationState);
 
             if (request != null)
                 CorrelationState.TryAddOrUpdateCorrelationValue("CallerContext", request.Context);
@@ -76,8 +78,6 @@ namespace Collector.Common.Infrastructure.WebApi.Filters
                 {
                 }
             }
-
-            CorrelationState.ClearCorrelation();
 
             return base.OnActionExecutedAsync(actionExecutedContext, cancellationToken);
         }
