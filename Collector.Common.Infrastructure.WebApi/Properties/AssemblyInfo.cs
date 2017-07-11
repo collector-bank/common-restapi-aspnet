@@ -11,9 +11,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Collector.Common.Infrastructure.WebApi")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("WebApi filters, bindings, and utilities for request response logging, Collector.Common.RestContracts Model binding, Error handling and correlation")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Collector Bank AB")]
 [assembly: AssemblyProduct("Collector.Common.Infrastructure.WebApi")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
@@ -37,5 +37,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("7.0.5")]
-[assembly: AssemblyFileVersion("7.0.5")]
+[assembly: AssemblyVersion("7.0.6")]
+[assembly: AssemblyFileVersion("7.0.6")]
