@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Collector.Common.Infrastructure.WebApi")]
-[assembly: AssemblyDescription("WebApi filters, bindings, and utilities, for request response logging, Collector.Common.RestContracts Model binding, Error handling and correlation")]
+[assembly: AssemblyDescription("WebApi filters, bindings, and utilities for request response logging, Collector.Common.RestContracts Model binding, Error handling and correlation")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Collector Bank AB")]
 [assembly: AssemblyProduct("Collector.Common.Infrastructure.WebApi")]
