@@ -89,7 +89,7 @@ namespace Collector.Common.Infrastructure.WebApi
                                          {
                                              new ErrorInfo
                                              {
-                                                 Message = errorcode,
+                                                 Message = "BUSINESS_VIOLATION",
                                                  Reason = errorcode
                                              }
                                          }
