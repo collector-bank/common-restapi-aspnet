@@ -1,10 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="RestfulParameterBinding.cs" company="Collector AB">
-//   Copyright © Collector AB. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
-
-namespace Collector.Common.Infrastructure.WebApi.Infrastructure
+﻿namespace Collector.Common.Infrastructure.WebApi.Infrastructure
 {
     using System.Threading;
     using System.Threading.Tasks;

@@ -1,10 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="RequestValidationFilter.cs" company="Collector AB">
-//   Copyright © Collector AB. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
-
-namespace Collector.Common.Infrastructure.WebApi.Filters
+﻿namespace Collector.Common.Infrastructure.WebApi.Filters
 {
     using System.Collections.Generic;
     using System.Linq;

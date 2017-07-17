@@ -433,7 +433,6 @@
 	<s:String x:Key="/Default/CodeStyle/Naming/JavaScriptNaming/UserRules/=TS_005FPUBLIC_005FSTATIC_005FTYPE_005FFIELD/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="aaBb" /&gt;</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/JavaScriptNaming/UserRules/=TS_005FPUBLIC_005FTYPE_005FFIELD/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="aaBb" /&gt;</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/JavaScriptNaming/UserRules/=TS_005FPUBLIC_005FTYPE_005FMETHOD/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="aaBb" /&gt;</s:String>
-	<s:String x:Key="/Default/CodeStyle/Naming/JavaScriptNaming/UserRules/=TS_005FTYPE_005FALIAS/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb" /&gt;</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/JavaScriptNaming/UserRules/=TS_005FTYPE_005FPARAMETER/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="T" Suffix="" Style="AaBb" /&gt;</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/VBNaming/EventHandlerPatternLong/@EntryValue">$object$_On$event$</s:String>
 	<s:Boolean x:Key="/Default/CodeStyle/CodeFormatting/JavaScriptCodeFormatting/JavaScriptFormatOther/ALIGN_MULTIPLE_DECLARATION/@EntryValue">True</s:Boolean>
@@ -468,7 +467,6 @@
 	<s:String x:Key="/Default/CodeStyle/Naming/XamlNaming/UserRules/=NAMESPACE_005FALIAS/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="aaBb" /&gt;</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/XamlNaming/UserRules/=XAML_005FFIELD/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb" /&gt;</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/XamlNaming/UserRules/=XAML_005FRESOURCE/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb" /&gt;</s:String>
-	<s:String x:Key="/Default/Environment/Hierarchy/PsiConfigurationSettingsKey/CustomLocation/@EntryValue">C:\Users\sc_adali\AppData\Local\JetBrains\Transient\ReSharperPlatformVs15\v08_84fe44e3\SolutionCaches</s:String>
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ECSharpFileLayoutPatternsUpgrade/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ESettingsUpgrade_002EAddAccessorOwnerDeclarationBracesMigration/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ESettingsUpgrade_002EMigrateBlankLinesAroundFieldToBlankLinesAroundProperty/@EntryIndexedValue">True</s:Boolean>
@@ -773,37 +771,37 @@ namespace $CLASS_NAMESPACE$&#xD;
     }&#xD;
   }&#xD;
 }</s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932869/@KeyIndexDefined">False</s:Boolean>
-	
-	
-	
-	
-	
-	
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932869/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932869/Comment/@EntryValue">SystemTimeOffset.UtcNow should be used</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932869/IsReplacePattern/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932869/LanguageName/@EntryValue">CSHARP</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932869/ReplacePattern/@EntryValue">SystemTimeOffset.UtcNow</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932869/SearchPattern/@EntryValue">DateTime.Now</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932869/Severity/@EntryValue">WARNING</s:String>
 
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932870/@KeyIndexDefined">False</s:Boolean>
-	
-	
-	
-	
-	
-	
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932870/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932870/Comment/@EntryValue">SystemTimeOffset.UtcNow should be used</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932870/IsReplacePattern/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932870/LanguageName/@EntryValue">CSHARP</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932870/ReplacePattern/@EntryValue">SystemTimeOffset.UtcNow</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932870/SearchPattern/@EntryValue">DateTime.UtcNow</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932870/Severity/@EntryValue">WARNING</s:String>
 
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932871/@KeyIndexDefined">False</s:Boolean>
-	
-	
-	
-	
-	
-	
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932871/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932871/Comment/@EntryValue">SystemTimeOffset.UtcNow should be used</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932871/IsReplacePattern/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932871/LanguageName/@EntryValue">CSHARP</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932871/ReplacePattern/@EntryValue">SystemTimeOffset.UtcNow</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932871/SearchPattern/@EntryValue">DateTimeOffset.Now</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932871/Severity/@EntryValue">WARNING</s:String>
 
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932872/@KeyIndexDefined">False</s:Boolean>
-	
-	
-	
-	
-	
-	
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932872/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932872/Comment/@EntryValue">SystemTimeOffset.UtcNow should be used</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932872/IsReplacePattern/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932872/LanguageName/@EntryValue">CSHARP</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932872/ReplacePattern/@EntryValue">SystemTimeOffset.UtcNow</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932872/SearchPattern/@EntryValue">DateTimeOffset.UtcNow</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932872/Severity/@EntryValue">WARNING</s:String>
 
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932873/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932873/Comment/@EntryValue">DateTimeOffset should be used</s:String>
@@ -813,12 +811,12 @@ namespace $CLASS_NAMESPACE$&#xD;
 	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932873/SearchPattern/@EntryValue">DateTime</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=537ED01E8E894146ABD52E2B75932873/Severity/@EntryValue">WARNING</s:String>
 
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=9B08157E3AE5B14C9FD0AC93EDC1C273/@KeyIndexDefined">False</s:Boolean>
-	
-	
-	
-	
-	
-	
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=9B08157E3AE5B14C9FD0AC93EDC1C273/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=9B08157E3AE5B14C9FD0AC93EDC1C273/Comment/@EntryValue">SystemTime.Now should be used instead of DateTime.Now</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=9B08157E3AE5B14C9FD0AC93EDC1C273/IsReplacePattern/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=9B08157E3AE5B14C9FD0AC93EDC1C273/LanguageName/@EntryValue">CSHARP</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=9B08157E3AE5B14C9FD0AC93EDC1C273/ReplacePattern/@EntryValue">SystemTime.Now</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=9B08157E3AE5B14C9FD0AC93EDC1C273/SearchPattern/@EntryValue">DateTime.Now</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=9B08157E3AE5B14C9FD0AC93EDC1C273/Severity/@EntryValue">WARNING</s:String>
 	
 	</wpf:ResourceDictionary>

@@ -1,10 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ErrorHandlingActionInvoker.cs" company="Collector AB">
-//   Copyright © Collector AB. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
-
-namespace Collector.Common.Infrastructure.WebApi
+﻿namespace Collector.Common.Infrastructure.WebApi
 {
     using System;
     using System.Net;

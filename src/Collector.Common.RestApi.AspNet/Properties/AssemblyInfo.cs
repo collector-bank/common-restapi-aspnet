@@ -10,12 +10,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Collector.Common.Infrastructure.WebApi")]
+[assembly: AssemblyTitle("Collector.Common.RestApi.AspNet")]
 [assembly: AssemblyDescription("WebApi filters, bindings, and utilities for request response logging, Collector.Common.RestContracts Model binding, Error handling and correlation")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Collector Bank AB")]
-[assembly: AssemblyProduct("Collector.Common.Infrastructure.WebApi")]
-[assembly: AssemblyCopyright("Copyright ©  2017")]
+[assembly: AssemblyProduct("Collector.Common.RestApi.AspNet")]
+[assembly: AssemblyCopyright("Copyright ©2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
