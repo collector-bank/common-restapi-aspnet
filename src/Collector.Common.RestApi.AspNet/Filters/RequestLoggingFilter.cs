@@ -1,4 +1,4 @@
-﻿namespace Collector.Common.Infrastructure.WebApi.Filters
+﻿namespace Collector.Common.RestApi.AspNet.Filters
 {
     using System;
     using System.Collections.Concurrent;
@@ -11,7 +11,7 @@
     using System.Web;
     using System.Web.Http.Controllers;
     using System.Web.Http.Filters;
-    
+
     using Collector.Common.RestContracts;
 
     using Newtonsoft.Json;
