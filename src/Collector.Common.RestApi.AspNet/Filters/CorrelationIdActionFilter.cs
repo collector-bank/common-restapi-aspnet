@@ -1,4 +1,4 @@
-﻿namespace Collector.Common.Infrastructure.WebApi.Filters
+﻿namespace Collector.Common.RestApi.AspNet.Filters
 {
     using System;
     using System.Linq;
@@ -9,9 +9,8 @@
     using System.Web.Http.Filters;
 
     using Collector.Common.Correlation;
-    
-    using Microsoft.CSharp.RuntimeBinder;
 
+    using Microsoft.CSharp.RuntimeBinder;
 
     public class CorrelationIdActionFilter : ActionFilterAttribute
     {

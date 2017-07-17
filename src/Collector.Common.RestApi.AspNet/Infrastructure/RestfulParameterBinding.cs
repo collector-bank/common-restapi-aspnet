@@ -1,4 +1,4 @@
-﻿namespace Collector.Common.Infrastructure.WebApi.Infrastructure
+﻿namespace Collector.Common.RestApi.AspNet.Infrastructure
 {
     using System.Threading;
     using System.Threading.Tasks;

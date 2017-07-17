@@ -1,4 +1,4 @@
-﻿namespace Collector.Common.Infrastructure.WebApi.Infrastructure
+﻿namespace Collector.Common.RestApi.AspNet.Infrastructure
 {
     using System.Net;
     using System.Net.Http;

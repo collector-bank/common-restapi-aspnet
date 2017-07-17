@@ -1,4 +1,4 @@
-﻿namespace Collector.Common.Infrastructure.WebApi
+﻿namespace Collector.Common.RestApi.AspNet
 {
     using Serilog;
 

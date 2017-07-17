@@ -1,4 +1,4 @@
-﻿namespace Collector.Common.Infrastructure.WebApi.Filters
+﻿namespace Collector.Common.RestApi.AspNet.Filters
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -6,7 +6,7 @@
     using System.Net.Http;
     using System.Web.Http.Controllers;
     using System.Web.Http.Filters;
-    
+
     using Collector.Common.RestContracts;
     using Collector.Common.RestContracts.Interfaces;
 

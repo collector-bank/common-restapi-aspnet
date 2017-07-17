@@ -1,4 +1,4 @@
-﻿namespace Collector.Common.Infrastructure.WebApi.Filters
+﻿namespace Collector.Common.RestApi.AspNet.Filters
 {
     using System.Linq;
     using System.Threading;
