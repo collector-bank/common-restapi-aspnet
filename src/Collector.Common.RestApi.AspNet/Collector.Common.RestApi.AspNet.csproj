@@ -4,10 +4,7 @@
 		<TargetFrameworks>net45</TargetFrameworks>
 		<AssemblyName>Collector.Common.RestApi.AspNet</AssemblyName>
 		<PackageId>Collector.Common.RestApi.AspNet</PackageId>
-		<GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-		<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-		<GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-		<Version>8.0.0</Version>
+		<Version>8.0.1</Version>
 		<Description>WebApi filters, bindings, and utilities for request response logging, Collector.Common.RestContracts Model binding, Error handling and correlation</Description>
 		<Authors>Team Houdini, Team Heimdal</Authors>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -15,7 +12,8 @@
 		<RepositoryType>git</RepositoryType>
 		<PackageProjectUrl>https://github.com/collector-bank/common-restapi-aspnet</PackageProjectUrl>
 		<PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
-	  <PackageIconUrl>https://github.com/collector-bank/common-restapi-aspnet/blob/master/icon.png</PackageIconUrl>
+	  <PackageIconUrl>https://raw.githubusercontent.com/collector-bank/common-restapi-aspnet/master/icon.png</PackageIconUrl>
+	  <Company>Collector Bank AB</Company>
 	</PropertyGroup>
 	<ItemGroup>
 	  <PackageReference Include="Collector.Common.Correlation" Version="1.0.4" />
