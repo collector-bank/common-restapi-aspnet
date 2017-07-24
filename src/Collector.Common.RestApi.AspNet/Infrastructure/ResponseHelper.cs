@@ -7,15 +7,24 @@
 
     public static class ResponseHelper
     {
-        public static HttpResponseMessage BuildResponse<T>(this HttpRequestMessage request, T data, HttpStatusCode status = HttpStatusCode.OK, string apiVersion = null)
+        public static HttpResponseMessage BuildOkDataResponse<T>(this HttpRequestMessage request, T data)
         {
             var response = new Response<T>
             {
-                ApiVersion = apiVersion,
                 Data = data
             };
 
-            return request.CreateResponse(status, response);
+            return request.CreateResponse(HttpStatusCode.OK, response);
+        }
+
+        public static HttpResponseMessage BuildOkVoidResponse(this HttpRequestMessage request)
+        {
+            var response = new Response<object>
+            {
+                Data = null
+            };
+
+            return request.CreateResponse(HttpStatusCode.OK, response);
         }
     }
 }
