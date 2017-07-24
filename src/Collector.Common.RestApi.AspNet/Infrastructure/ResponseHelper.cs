@@ -1,7 +1,9 @@
 ﻿namespace Collector.Common.RestApi.AspNet.Infrastructure
 {
+    using System.IO;
     using System.Net;
     using System.Net.Http;
+    using System.Net.Http.Headers;
 
     using Collector.Common.RestContracts;
 
@@ -25,6 +27,16 @@
             };
 
             return request.CreateResponse(HttpStatusCode.OK, response);
+        }
+
+        public static HttpResponseMessage BuildOkStreamResponse(this HttpRequestMessage request, Stream stream, string mediaType)
+        {
+            var response = request.CreateResponse(HttpStatusCode.OK);
+
+            response.Content = new StreamContent(stream);
+            response.Content.Headers.ContentType = new MediaTypeHeaderValue(mediaType);
+
+            return response;
         }
     }
 }
