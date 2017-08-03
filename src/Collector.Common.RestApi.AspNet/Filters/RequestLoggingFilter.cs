@@ -19,12 +19,15 @@
 
     using Serilog;
 
+    using HttpMethod = System.Net.Http.HttpMethod;
+
     public class RequestLoggingFilter : ActionFilterAttribute
     {
         internal const string REQUEST_RECIEVED_TIME = "RequestRecievedTime";
         private static readonly ConcurrentDictionary<Type, IReadOnlyCollection<PropertyInfo>> CachedSensitiveStrings = new ConcurrentDictionary<Type, IReadOnlyCollection<PropertyInfo>>();
+        private static readonly HttpMethod HttpMethodPatch = new HttpMethod("PATCH");
         private readonly ILogger _logger;
-
+        
         public RequestLoggingFilter(ILogger logger)
         {
             _logger = logger.ForContext(GetType());
@@ -54,8 +57,9 @@
 
         private static string ReadRequestContent(HttpActionContext actionContext)
         {
-            if (actionContext.Request.Method != System.Net.Http.HttpMethod.Post
-                && actionContext.Request.Method != System.Net.Http.HttpMethod.Put)
+            if (actionContext.Request.Method != HttpMethod.Post
+                && actionContext.Request.Method != HttpMethod.Put
+                && actionContext.Request.Method != HttpMethodPatch)
                 return string.Empty;
 
             using (var stream = new MemoryStream())
