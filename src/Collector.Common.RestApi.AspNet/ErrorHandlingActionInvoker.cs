@@ -8,6 +8,8 @@
 
     using Collector.Common.RestContracts;
 
+    using Newtonsoft.Json;
+
     using Serilog;
 
     public abstract class ErrorHandlingActionInvoker : ApiControllerActionInvoker
@@ -32,6 +34,9 @@
             try
             {
                 var httpResponseMessage = await base.InvokeActionAsync(actionContext, cancellationToken);
+
+                EnsureResponseCanBeSerialized(httpResponseMessage);
+
                 return httpResponseMessage.IsSuccessStatusCode
                            ? httpResponseMessage
                            : CreateCustomHttpStatusCodeResponse(actionContext, httpResponseMessage.StatusCode);
@@ -89,6 +94,13 @@
                                          }
                             }
                 });
+        }
+
+        private static void EnsureResponseCanBeSerialized(HttpResponseMessage httpResponseMessage)
+        {
+            var objectContent = httpResponseMessage.Content as ObjectContent;
+            if (objectContent != null)
+                JsonConvert.SerializeObject(objectContent.Value);
         }
 
         private void LogException(HttpActionContext actionContext, Exception baseException)
