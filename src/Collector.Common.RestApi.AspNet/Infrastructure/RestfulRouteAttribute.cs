@@ -6,7 +6,7 @@
     using System.Web.Http.Routing;
 
     /// <summary>
-    /// A routing attirbute that uses the controller methods name to match against a rest verb.
+    /// A routing attribute that uses the controller methods name to match against a rest verb.
     /// </summary>
     public class RestfulRouteAttribute : RouteFactoryAttribute
     {
