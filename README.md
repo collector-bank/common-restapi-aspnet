@@ -67,7 +67,7 @@ public class GetController : ApiController
 
 			return Request.BuildOkDataResponse(new MyGetRequestResponse 
 			{
-			SomeProperty = result
+				SomeProperty = result
 			});
 		}
 		catch(SomeEntityNotFoundException ex)
@@ -144,7 +144,7 @@ public class GetController : ApiController
 
 			return Request.BuildOkDataResponse(new MyGetRequestResponse 
 			{
-			SomeProperty = result
+				SomeProperty = result
 			});
 		}
 		catch(SomeEntityNotFoundException ex)
