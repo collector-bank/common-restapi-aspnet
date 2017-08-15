@@ -104,7 +104,7 @@ config.Filters.Add(new AuthorizeAttribute());
 ## Services
 Two services are provided. 
 
-The 'ModelBinderProvider', mandatory. Provides model binding.
+The 'BodyAwareModelBinderProvider', mandatory. Provides model binding.
 
 ```csharp
 config.Services.Insert(typeof(ModelBinderProvider), 0, new BodyAwareModelBinderProvider());
