@@ -1,7 +1,7 @@
 # Collector Common RestApi fot Asp.Net
 
 [![Build status](https://ci.appveyor.com/api/projects/status/k3m0g3tc39p6avwa?svg=true)](https://ci.appveyor.com/project/HoudiniCollector/common-restapi-aspnet)
-Provides a set of filters, services and model binding utilities for AspNet WebApi when using contracts of  [Collector.Common.RestContracts](https://github.com/collector-bank/common-restcontracts)
+Provides a set of filters, services and model binding utilities for AspNet WebApi when using contracts implementing  [Collector.Common.RestContracts](https://github.com/collector-bank/common-restcontracts)
 ## TL;DR
 
 **WebApiConfig**
@@ -76,7 +76,7 @@ public class GetController : ApiController
 		}
 		catch(Exception ex)
 		{
-			return Request.CreateResponse(HttpStatusCode.InternalServcerError);
+			return Request.CreateResponse(HttpStatusCode.InternalServiceError);
 		}
 	}
 }
@@ -86,11 +86,11 @@ public class GetController : ApiController
 
 The filters provided are optional, but can give you some nice features like: 
 
- - ResponseLoggingFilter, will log the response to the provided ILogger, with, timings, body and status codes.
- - RequestLoggingFilter, will log the request to the provided ILogger, which controller will handle, the request body, http method etc.
- - RequestValidationFilter, will validate the request, so that it is an valid RestContract, and if not, it will return an error response.
- - ContextActionFilterr, will ensure that the provided context will be set on the response.
- - CorrelationIdActionFilter, will set a correlation id (so that all logs, related to this request, will have a common id, and will set this on the response 
+ - ResponseLoggingFilter - will log the response to the provided ILogger with timings, body and status codes.
+ - RequestLoggingFilter - will log the request to the provided ILogger, name of the controller handling the request, the request body, http method etc.
+ - RequestValidationFilter - will validate the request contract, and if it is not valid then it will return an error response.
+ - ContextActionFilter - will ensure that the provided context will be set on the response.
+ - CorrelationIdActionFilter - will set a correlation id (all logs related to this request will have a common id set on the response)
 
 ```csharp
 config.Filters.Add(new ResponseLoggingFilter(logger));
@@ -104,18 +104,18 @@ config.Filters.Add(new AuthorizeAttribute());
 ## Services
 Two services are provided. 
 
-The 'ModelBinderProvider' is mandatory for being able to bind the request to a RestContract.
+The 'ModelBinderProvider', mandatory. Provides model binding.
 
 ```csharp
 config.Services.Insert(typeof(ModelBinderProvider), 0, new BodyAwareModelBinderProvider());
 ```
-The ErrorHandlingActionInvoker, is an abstract class, which you may want to implement, and setup, for easing error handling through out the request pipeline. This will ensure that all 'unhandled' exceptions thrown from the controller actions, will return an response object, and if desired, contain a custom error code.
+The ErrorHandlingActionInvoker, is an abstract class that you may want to implement. It will ease error handling in the request pipeline. 
+This will ensure that all 'unhandled' exceptions thrown from the controller actions will return a response object and if desired, contain a custom error code.
 
 ```csharp
 config.Services.Replace(typeof(IHttpActionInvoker), new MyErrorHandlingActionInvoker(logger));
 ```
 ## Parameters, Routes and Responses
-The controllers to be used with RestContracts are fairly 'normal' WebApi controllers, with some exceptions.
 
 **ResponseHelper**
 Is a utility class, to wrap your data in a contract response, with the following util methods: 
@@ -130,8 +130,9 @@ Example
 
 **Get Requests**
 
-*Note that the RestfulRoute must match the resource identifier route of the request object.*
-*Also, note the [FromUri] which is needed on HTTP Get requests.*
+*Note that the RestfulRoute must match the resource identifier uri of the request object.*
+*Note the [FromUri] that is needed on HTTP Get requests.*
+
 ```csharp
 public class GetController : ApiController
 {
@@ -153,7 +154,7 @@ public class GetController : ApiController
 		}
 		catch(Exception ex)
 		{
-			return Request.CreateResponse(HttpStatusCode.InternalServcerError);
+			return Request.CreateResponse(HttpStatusCode.InternalServiceError);
 		}
 	}
 }
