@@ -58,31 +58,32 @@ public class WebApiApplication : System.Web.HttpApplication
 ```csharp
 public class GetController : ApiController
 {
-			[RestfulRoute("api/MyRequestResource/{Id}")]
-	        public HttpResponseMessage Get([FromUri] MyGetRequest request)
-	        {
-				try
-				{
-					var result = GetSomeDataForId(request.GetResourceIdentifier().Id);
-					
-					return Request.BuildOkDataResponse(new MyGetRequestResponse 
-					{
-						SomeProperty = result
-					});
-				}
-				catch(SomeEntitityNotFoundException ex)
-				{
-					return Request.CreateResponse(HttpStatusCode.NotFound);
-				}
-				catch(Exception ex)
-				{
-					return Request.CreateResponse(HttpStatusCode.InternalServcerError);
-				}
-			}
+	[RestfulRoute("api/MyRequestResource/{Id}")]
+	public HttpResponseMessage Get([FromUri] MyGetRequest request)
+	{
+		try
+		{
+			var result = GetSomeDataForId(request.GetResourceIdentifier().Id);
+
+			return Request.BuildOkDataResponse(new MyGetRequestResponse 
+			{
+			SomeProperty = result
+			});
+		}
+		catch(SomeEntitityNotFoundException ex)
+		{
+			return Request.CreateResponse(HttpStatusCode.NotFound);
+		}
+		catch(Exception ex)
+		{
+			return Request.CreateResponse(HttpStatusCode.InternalServcerError);
+		}
+	}
 }
 ```
 
-##Filters
+## Filters
+
 The filters provided are optional, but can give you some nice features like: 
 
  - ResponseLoggingFilter, will log the response to the provided ILogger, with, timings, body and status codes.
@@ -93,14 +94,14 @@ The filters provided are optional, but can give you some nice features like:
 
 ```csharp
 config.Filters.Add(new ResponseLoggingFilter(logger));
-            config.Filters.Add(new ContextActionFilter());
-            config.Filters.Add(new CorrelationIdActionFilter(setCorrelationIdFromContext: bool));
-            config.Filters.Add(new RequestLoggingFilter(logger));
-            config.Filters.Add(new RequestValidationFilter());
-            config.Filters.Add(new AuthorizeAttribute());
+config.Filters.Add(new ContextActionFilter());
+config.Filters.Add(new CorrelationIdActionFilter(setCorrelationIdFromContext: bool));
+config.Filters.Add(new RequestLoggingFilter(logger));
+config.Filters.Add(new RequestValidationFilter());
+config.Filters.Add(new AuthorizeAttribute());
 ```
 
-##Services
+## Services
 Two services are provided. 
 
 The 'ModelBinderProvider' is mandatory for being able to bind the request to a RestContract.
@@ -113,7 +114,7 @@ The ErrorHandlingActionInvoker, is an abstract class, which you may want to impl
 ```csharp
           config.Services.Replace(typeof(IHttpActionInvoker), new MyErrorHandlingActionInvoker(logger));
 ```
-##Parameters, Routes and Responses
+## Parameters, Routes and Responses
 The controllers to be used with RestContracts are fairly 'normal' WebApi controllers, with some exceptions.
 
 **ResponseHelper**
@@ -134,46 +135,49 @@ Example
 ```csharp
 public class GetController : ApiController
 {
-			[RestfulRoute("api/MyRequestResource/{Id}")]
-	        public HttpResponseMessage Get([FromUri] MyGetRequest request)
-	        {
-				try
-				{
-					var result = GetSomeDataForId(request.GetResourceIdentifier().Id);
-					
-					return Request.BuildOkDataResponse(new MyGetRequestResponse 
-					{
-						SomeProperty = result
-					});
-				}
-				catch(SomeEntitityNotFoundException ex)
-				{
-					return Request.CreateResponse(HttpStatusCode.NotFound);
-				}
-				catch(Exception ex)
-				{
-					return Request.CreateResponse(HttpStatusCode.InternalServcerError);
-				}
-			}
+	[RestfulRoute("api/MyRequestResource/{Id}")]
+	public HttpResponseMessage Get([FromUri] MyGetRequest request)
+	{
+		try
+		{
+			var result = GetSomeDataForId(request.GetResourceIdentifier().Id);
+
+			return Request.BuildOkDataResponse(new MyGetRequestResponse 
+			{
+			SomeProperty = result
+			});
+		}
+		catch(SomeEntitityNotFoundException ex)
+		{
+			return Request.CreateResponse(HttpStatusCode.NotFound);
+		}
+		catch(Exception ex)
+		{
+			return Request.CreateResponse(HttpStatusCode.InternalServcerError);
+		}
+	}
 }
 ```
 **Other requests**
 ```csharp
 public class PostController : ApiController
 {
-			[RestfulRoute("api/MyRequestResource/{Id}")]
-	        public HttpResponseMessage Post(MyPostRequest request)
-	        {
-				try
-				{
-					UpdateSomeData(request.GetResourceIdentifier().Id, request.Property);
-					
-					return Request.BuildOkVoidResponse();
-				}
-				catch(SomeEntitityNotFoundException ex)
-				{
-					return Request.CreateResponse(HttpStatusCode.NotFound);
-				}
-				catch(Exception ex)
-				{
-					return Request.CreateResponse(HttpStatusCode.
+	[RestfulRoute("api/MyRequestResource/{Id}")]
+	public HttpResponseMessage Post(MyPostRequest request)
+	{
+		try
+		{
+			UpdateSomeData(request.GetResourceIdentifier().Id, request.Property);
+
+			return Request.BuildOkVoidResponse();
+		}
+		catch(SomeEntitityNotFoundException ex)
+		{
+			return Request.CreateResponse(HttpStatusCode.NotFound);
+		}
+		catch(Exception ex)
+		{
+			return Request.CreateResponse(HttpStatusCode.InternalServerError);
+		}
+	}
+}
