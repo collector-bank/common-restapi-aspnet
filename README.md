@@ -88,7 +88,7 @@ The filters provided are optional, but can give you some nice features like:
 
  - ResponseLoggingFilter - will log the response to the provided ILogger with timings, body and status codes.
  - RequestLoggingFilter - will log the request to the provided ILogger, name of the controller handling the request, the request body, http method etc.
- - RequestValidationFilter - will validate the request contract, and if it is not valid then it will return an error response.
+ - RequestValidationFilter - will validate the request contract and if it is not valid then it will return an error response.
  - ContextActionFilter - will ensure that the provided context will be set on the response.
  - CorrelationIdActionFilter - will set a correlation id (all logs related to this request will have a common id set on the response)
 
@@ -109,7 +109,7 @@ The 'BodyAwareModelBinderProvider', mandatory. Provides model binding.
 ```csharp
 config.Services.Insert(typeof(ModelBinderProvider), 0, new BodyAwareModelBinderProvider());
 ```
-The ErrorHandlingActionInvoker, is an abstract class that you may want to implement. It will ease error handling in the request pipeline. 
+The ErrorHandlingActionInvoker is an abstract class that you may want to implement. It will ease error handling in the request pipeline. 
 This will ensure that all 'unhandled' exceptions thrown from the controller actions will return a response object and if desired, contain a custom error code.
 
 ```csharp
@@ -118,7 +118,7 @@ config.Services.Replace(typeof(IHttpActionInvoker), new MyErrorHandlingActionInv
 ## Parameters, Routes and Responses
 
 **ResponseHelper**
-Is a utility class, to wrap your data in a contract response, with the following util methods: 
+Is an utility class used to wrap your data in a contract response with the following util methods: 
 ```csharp
  public static HttpResponseMessage BuildOkDataResponse<T>(this HttpRequestMessage request, T data);
  
