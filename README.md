@@ -70,7 +70,7 @@ public class GetController : ApiController
 			SomeProperty = result
 			});
 		}
-		catch(SomeEntitityNotFoundException ex)
+		catch(SomeEntityNotFoundException ex)
 		{
 			return Request.CreateResponse(HttpStatusCode.NotFound);
 		}
@@ -147,7 +147,7 @@ public class GetController : ApiController
 			SomeProperty = result
 			});
 		}
-		catch(SomeEntitityNotFoundException ex)
+		catch(SomeEntityNotFoundException ex)
 		{
 			return Request.CreateResponse(HttpStatusCode.NotFound);
 		}
@@ -171,7 +171,7 @@ public class PostController : ApiController
 
 			return Request.BuildOkVoidResponse();
 		}
-		catch(SomeEntitityNotFoundException ex)
+		catch(SomeEntityNotFoundException ex)
 		{
 			return Request.CreateResponse(HttpStatusCode.NotFound);
 		}
