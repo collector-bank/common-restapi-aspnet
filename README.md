@@ -5,7 +5,7 @@
 Provides a set of filters, services and model binding utilities for AspNet WebApi when using contracts of  [Collector.Common.RestContracts](https://github.com/collector-bank/common-restcontracts)
 ## TL;DR
 
-** WebApiConfig **
+**WebApiConfig**
 
 ```csharp
 public static class WebApiConfig
@@ -41,7 +41,7 @@ public static class WebApiConfig
 	}
 }
 ```
-** Global.asax **
+**Global.asax**
 ```csharp
 
 public class WebApiApplication : System.Web.HttpApplication
@@ -55,7 +55,7 @@ public class WebApiApplication : System.Web.HttpApplication
 }
                     
 ```
-** Controller **
+**Controller**
 ```csharp
 public class GetController : ApiController
 {
