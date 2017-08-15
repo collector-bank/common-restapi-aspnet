@@ -4,6 +4,9 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/k3m0g3tc39p6avwa?svg=true)](https://ci.appveyor.com/project/HoudiniCollector/common-restapi-aspnet)
 Provides a set of filters, services and model binding utilities for AspNet WebApi when using contracts of  [Collector.Common.RestContracts](https://github.com/collector-bank/common-restcontracts)
 ## TL;DR
+
+** WebApiConfig **
+
 ```csharp
 public static class WebApiConfig
 {
@@ -38,9 +41,7 @@ public static class WebApiConfig
 	}
 }
 ```
-
-Global.asax: 
-
+** Global.asax **
 ```csharp
 
 public class WebApiApplication : System.Web.HttpApplication
@@ -54,7 +55,7 @@ public class WebApiApplication : System.Web.HttpApplication
 }
                     
 ```
-
+** Controller **
 ```csharp
 public class GetController : ApiController
 {
