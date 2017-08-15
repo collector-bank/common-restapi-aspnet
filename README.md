@@ -168,7 +168,7 @@ public class PostController : ApiController
 	{
 		try
 		{
-			UpdateSomeData(request.GetResourceIdentifier().Id, request.Property);
+			CreateSomeData(request.GetResourceIdentifier().Id, request.Property);
 
 			return Request.BuildOkVoidResponse();
 		}
@@ -181,4 +181,6 @@ public class PostController : ApiController
 			return Request.CreateResponse(HttpStatusCode.InternalServerError);
 		}
 	}
+	
+	///...
 }
