@@ -112,7 +112,7 @@ config.Services.Insert(typeof(ModelBinderProvider), 0, new BodyAwareModelBinderP
 The ErrorHandlingActionInvoker, is an abstract class, which you may want to implement, and setup, for easing error handling through out the request pipeline. This will ensure that all 'unhandled' exceptions thrown from the controller actions, will return an response object, and if desired, contain a custom error code.
 
 ```csharp
-          config.Services.Replace(typeof(IHttpActionInvoker), new MyErrorHandlingActionInvoker(logger));
+config.Services.Replace(typeof(IHttpActionInvoker), new MyErrorHandlingActionInvoker(logger));
 ```
 ## Parameters, Routes and Responses
 The controllers to be used with RestContracts are fairly 'normal' WebApi controllers, with some exceptions.
