@@ -42,7 +42,7 @@
 
                 var sensitiveStrings = GetSensitiveStrings(actionContext);
                 var rawRequestBody = ReadRequestContent(actionContext);
-                var formattedRequestBody = FormatRequestBody(rawRequestBody, sensitiveStrings);
+                var formattedRequestBody = FormatRequestBody(actionContext, rawRequestBody, sensitiveStrings);
 
                 _logger.ForContextIfNotNull("RawRequestBody", sensitiveStrings.Any() ? "Request contains sensitive information" : rawRequestBody)
                        .ForContextIfNotNull("RequestBody", formattedRequestBody)
@@ -73,14 +73,14 @@
             }
         }
 
-        private string FormatRequestBody(string value, IEnumerable<PropertyInfo> sensitiveStrings)
+        private string FormatRequestBody(HttpActionContext actionContext, string value, IEnumerable<PropertyInfo> sensitiveStrings)
         {
             try
             {
                 var jObject = (JObject)JsonConvert.DeserializeObject(value);
                 foreach (var sensitiveString in sensitiveStrings)
                 {
-                    if(jObject.GetValue(sensitiveString.Name) != null)
+                    if(actionContext.Request.Method != HttpMethodPatch || jObject.GetValue(sensitiveString.Name) != null)
                         jObject[sensitiveString.Name] = new string('*', 10);
                 }
 
