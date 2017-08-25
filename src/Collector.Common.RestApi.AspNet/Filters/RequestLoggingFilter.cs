@@ -79,7 +79,10 @@
             {
                 var jObject = (JObject)JsonConvert.DeserializeObject(value);
                 foreach (var sensitiveString in sensitiveStrings)
-                    jObject[sensitiveString.Name] = new string('*', 10);
+                {
+                    if(jObject.GetValue(sensitiveString.Name) != null)
+                        jObject[sensitiveString.Name] = new string('*', 10);
+                }
 
                 return JsonConvert.SerializeObject(jObject, Formatting.Indented);
             }
