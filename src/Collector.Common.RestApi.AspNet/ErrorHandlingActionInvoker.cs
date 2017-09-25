@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
     using System.Web.Http.Controllers;
 
+    using Collector.Common.RestApi.AspNet.Infrastructure;
     using Collector.Common.RestContracts;
 
     using Newtonsoft.Json;
@@ -51,7 +52,7 @@
         {
             var errorCode = GetErrorCode(exception);
             if (!string.IsNullOrEmpty(errorCode))
-                return CreateUnprocessableEntityResponse(actionContext, errorCode);
+                return actionContext.Request.BuildUnprocessableEntityResponse(errorCode);
 
             LogException(actionContext, exception);
 
@@ -70,28 +71,6 @@
                             {
                                 Message = httpStatusCode.ToString(),
                                 Code = $"{(int)httpStatusCode}"
-                            }
-                });
-        }
-
-        private static HttpResponseMessage CreateUnprocessableEntityResponse(HttpActionContext actionContext, string errorcode)
-        {
-            return actionContext.Request.CreateResponse(
-                (HttpStatusCode)422,
-                new Response<object>
-                {
-                    Error = new Error
-                            {
-                                Message = "Unprocessable Entity",
-                                Code = "422",
-                                Errors = new[]
-                                         {
-                                             new ErrorInfo
-                                             {
-                                                 Message = "BUSINESS_VIOLATION",
-                                                 Reason = errorcode
-                                             }
-                                         }
                             }
                 });
         }

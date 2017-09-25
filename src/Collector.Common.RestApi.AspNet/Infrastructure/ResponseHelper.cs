@@ -38,5 +38,27 @@
 
             return response;
         }
+
+        public static HttpResponseMessage BuildUnprocessableEntityResponse(this HttpRequestMessage request, string errorcode)
+        {
+            return request.CreateResponse(
+                (HttpStatusCode)422,
+                new Response<object>
+                {
+                    Error = new Error
+                            {
+                                Message = "Unprocessable Entity",
+                                Code = "422",
+                                Errors = new[]
+                                         {
+                                             new ErrorInfo
+                                             {
+                                                 Message = "BUSINESS_VIOLATION",
+                                                 Reason = errorcode
+                                             }
+                                         }
+                            }
+                });
+        }
     }
 }
