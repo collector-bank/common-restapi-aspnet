@@ -12,9 +12,9 @@
         public static HttpResponseMessage BuildOkDataResponse<T>(this HttpRequestMessage request, T data)
         {
             var response = new Response<T>
-            {
-                Data = data
-            };
+                           {
+                               Data = data
+                           };
 
             return request.CreateResponse(HttpStatusCode.OK, response);
         }
@@ -22,9 +22,9 @@
         public static HttpResponseMessage BuildOkVoidResponse(this HttpRequestMessage request)
         {
             var response = new Response<object>
-            {
-                Data = null
-            };
+                           {
+                               Data = null
+                           };
 
             return request.CreateResponse(HttpStatusCode.OK, response);
         }
@@ -37,6 +37,28 @@
             response.Content.Headers.ContentType = new MediaTypeHeaderValue(mediaType);
 
             return response;
+        }
+
+        public static HttpResponseMessage BuildUnprocessableEntityResponse(this HttpRequestMessage request, string errorcode)
+        {
+            return request.CreateResponse(
+                (HttpStatusCode)422,
+                new Response<object>
+                {
+                    Error = new Error
+                            {
+                                Message = "Unprocessable Entity",
+                                Code = "422",
+                                Errors = new[]
+                                         {
+                                             new ErrorInfo
+                                             {
+                                                 Message = "BUSINESS_VIOLATION",
+                                                 Reason = errorcode
+                                             }
+                                         }
+                            }
+                });
         }
     }
 }
