@@ -12,9 +12,9 @@
         public static HttpResponseMessage BuildOkDataResponse<T>(this HttpRequestMessage request, T data)
         {
             var response = new Response<T>
-                           {
-                               Data = data
-                           };
+            {
+                Data = data
+            };
 
             return request.CreateResponse(HttpStatusCode.OK, response);
         }
@@ -22,9 +22,9 @@
         public static HttpResponseMessage BuildOkVoidResponse(this HttpRequestMessage request)
         {
             var response = new Response<object>
-                           {
-                               Data = null
-                           };
+            {
+                Data = null
+            };
 
             return request.CreateResponse(HttpStatusCode.OK, response);
         }
