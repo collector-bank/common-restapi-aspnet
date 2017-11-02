@@ -22,8 +22,10 @@
             var responseContent = actionExecutedContext.ActionContext.Response.Content;
             var mediaType = responseContent?.Headers?.ContentType?.MediaType;
             var statusCode = (int)actionExecutedContext.Response.StatusCode;
+            var controllerName = actionExecutedContext.ActionContext?.ControllerContext?.Controller?.GetType()?.FullName;
 
-            var logger = _logger.ForContext("StatusCode", statusCode);
+            var logger = _logger.ForContext("StatusCode", statusCode)
+                                .ForContextIfNotNull("Controller", controllerName);
 
             if (!string.IsNullOrEmpty(mediaType))
             {
