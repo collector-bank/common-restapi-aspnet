@@ -4,7 +4,7 @@
 		<TargetFrameworks>net45</TargetFrameworks>
 		<AssemblyName>Collector.Common.RestApi.AspNet</AssemblyName>
 		<PackageId>Collector.Common.RestApi.AspNet</PackageId>
-		<Version>10.2.0</Version>
+		<Version>11.0.0</Version>
 		<Description>WebApi filters, bindings, and utilities for request response logging, Collector.Common.RestContracts Model binding, Error handling and correlation</Description>
 		<Authors>Team Houdini, Team Heimdal</Authors>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -17,12 +17,12 @@
 	  <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Collector.Common.RestApi.AspNet.xml</DocumentationFile>
 	</PropertyGroup>
 	<ItemGroup>
-	  <PackageReference Include="Collector.Common.Correlation" Version="1.0.4" />
-	  <PackageReference Include="Collector.Common.RestContracts" Version="5.0.0" />
-	  <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.3" />
-	  <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.3" />
+	  <PackageReference Include="Collector.Common.Correlation" Version="[2.0.0,3.0.0)" />
+	  <PackageReference Include="Collector.Common.RestContracts" Version="[9.0.0,10.0.0)" />
+	  <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="[5.2.3,6.0.0)" />
+	  <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="[5.2.3,6.0.0)" />
 	  <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
-	  <PackageReference Include="Serilog" Version="2.5.0" />
+	  <PackageReference Include="Serilog" Version="[2.5.0,3.0.0)" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Reference Include="Microsoft.CSharp" />
