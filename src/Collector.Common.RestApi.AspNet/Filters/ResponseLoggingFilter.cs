@@ -1,7 +1,10 @@
 ﻿namespace Collector.Common.RestApi.AspNet.Filters
 {
     using System;
+    using System.Linq;
     using System.Web.Http.Filters;
+
+    using Collector.Common.RestContracts.Interfaces;
 
     using Newtonsoft.Json;
 
@@ -24,16 +27,13 @@
             var statusCode = (int)actionExecutedContext.Response.StatusCode;
             var controllerName = actionExecutedContext.ActionContext?.ControllerContext?.Controller?.GetType()?.FullName;
 
+            var keyValuePair = actionExecutedContext?.ActionContext?.ActionArguments?.FirstOrDefault();
+            var request = keyValuePair?.Value as IRequest;
+
             var logger = _logger.ForContext("StatusCode", statusCode)
+                                .ForContextIfNotNull("MediaType", mediaType)
+                                .ForContextIfNotNull("ResponseContent", request?.GetResponseContentForLogging((string)Serialize(dynamicResponseContent.Value), mediaType))
                                 .ForContextIfNotNull("Controller", controllerName);
-
-            if (!string.IsNullOrEmpty(mediaType))
-            {
-                logger = logger.ForContext("MediaType", mediaType);
-
-                if (mediaType.ToLower().Contains("application/json"))
-                    logger = logger.ForContext("ResponseBody", Serialize(dynamicResponseContent.Value));
-            }
 
             var requestRecievedTime = actionExecutedContext.Request?.Properties?[RequestLoggingFilter.REQUEST_RECIEVED_TIME] as DateTimeOffset?;
             if (requestRecievedTime.HasValue)
