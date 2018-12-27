@@ -16,7 +16,7 @@
 
     public class RequestLoggingFilter : ActionFilterAttribute
     {
-        internal const string REQUEST_RECIEVED_TIME = "RequestRecievedTime";
+        internal const string REQUEST_RECEIVED_TIME = "RequestReceivedTime";
         private static readonly HttpMethod HttpMethodPatch = new HttpMethod("PATCH");
         private readonly ILogger _logger;
         
@@ -30,7 +30,7 @@
             try
             {
                 if (actionContext?.Request?.Properties != null)
-                    actionContext.Request.Properties[REQUEST_RECIEVED_TIME] = DateTimeOffset.UtcNow;
+                    actionContext.Request.Properties[REQUEST_RECEIVED_TIME] = DateTimeOffset.UtcNow;
 
                 var rawRequestBody = ReadRequestContent(actionContext);
                 var keyValuePair = actionContext?.ActionArguments?.FirstOrDefault();

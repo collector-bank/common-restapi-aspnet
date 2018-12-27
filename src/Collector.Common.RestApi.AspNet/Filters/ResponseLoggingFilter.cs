@@ -32,12 +32,16 @@
 
             var logger = _logger.ForContext("StatusCode", statusCode)
                                 .ForContextIfNotNull("MediaType", mediaType)
-                                .ForContextIfNotNull("ResponseContent", request?.GetResponseContentForLogging((string)Serialize(dynamicResponseContent.Value), mediaType))
                                 .ForContextIfNotNull("Controller", controllerName);
 
-            var requestRecievedTime = actionExecutedContext.Request?.Properties?[RequestLoggingFilter.REQUEST_RECIEVED_TIME] as DateTimeOffset?;
-            if (requestRecievedTime.HasValue)
-                logger = logger.ForContext("ResponseTimeMilliseconds", (int)(DateTimeOffset.UtcNow - requestRecievedTime.Value).TotalMilliseconds);
+            if (mediaType == "application/json")
+            {
+                logger = logger.ForContextIfNotNull("ResponseContent", request?.GetResponseContentForLogging((string)Serialize(dynamicResponseContent.Value), mediaType));
+            }
+
+            var requestReceivedTime = actionExecutedContext.Request?.Properties?[RequestLoggingFilter.REQUEST_RECEIVED_TIME] as DateTimeOffset?;
+            if (requestReceivedTime.HasValue)
+                logger = logger.ForContext("ResponseTimeMilliseconds", (int)(DateTimeOffset.UtcNow - requestReceivedTime.Value).TotalMilliseconds);
 
             logger.Information("Rest response sent");
         }
